@@ -7,79 +7,54 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import kotlinx.android.synthetic.main.activity_main.*
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.atilsamancioglu.kotlinlandmarkbook.databinding.ActivityMainBinding
 
 
-//var selectedGlobalBitmap : Bitmap? = null
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var landmarkList : ArrayList<Landmark>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
+        landmarkList = ArrayList<Landmark>()
 
-        //Data
-        var landmarkNames = ArrayList<String>()
-        landmarkNames.add("Pisa")
-        landmarkNames.add("Colosseum")
-        landmarkNames.add("Eiffel")
-        landmarkNames.add("London Bridge")
+        val pisa = Landmark("Pisa","Italy",R.drawable.pisa)
+        val colosseum = Landmark("Colloseum","Italy",R.drawable.colosseum)
+        val eiffel = Landmark("Eiffel","France",R.drawable.eiffel)
+        val londonBridge = Landmark("London Bridge","UK",R.drawable.londonbridge)
 
+        landmarkList.add(pisa)
+        landmarkList.add(colosseum)
+        landmarkList.add(eiffel)
+        landmarkList.add(londonBridge)
 
-
-        //Image
-        val pisa = BitmapFactory.decodeResource(applicationContext.resources,R.drawable.pisa)
-        val colosseum = BitmapFactory.decodeResource(applicationContext.resources,R.drawable.colosseum)
-        val eiffel = BitmapFactory.decodeResource(applicationContext.resources,R.drawable.eiffel)
-        val londonBridge  = BitmapFactory.decodeResource(applicationContext.resources,R.drawable.londonbridge)
-
-        var landmarkImages = ArrayList<Bitmap>()
-        landmarkImages.add(pisa)
-        landmarkImages.add(colosseum)
-        landmarkImages.add(eiffel)
-        landmarkImages.add(londonBridge)
-
-
-
-/*
-        //Image - Efficient
-        val pisaId = R.drawable.pisa
-        val colosseumId = R.drawable.colosseum
-        val eiffelId = R.drawable.eiffel
-        val londonBridgeId = R.drawable.londonbridge
-
-        var landmarkImageIds = ArrayList<Int>()
-        landmarkImageIds.add(pisaId)
-        landmarkImageIds.add(colosseumId)
-        landmarkImageIds.add(eiffelId)
-        landmarkImageIds.add(londonBridgeId)
-*/
-
-
+        //RecyclerView
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        val adapter = LandmarkAdapter(landmarkList)
+        binding.recyclerView.adapter = adapter
+        /*
         //Adapter: Layout & Data
 
-        //val adapter = ArrayAdapter(this,R.layout.list_row,R.id.textView2,landmarkNames)
-        val adapter = ArrayAdapter(this,android.R.layout.simple_list_item_1,landmarkNames)
+        val adapter = ArrayAdapter(this,android.R.layout.simple_list_item_1,landmarkList.map { landmark -> landmark.name })
 
-        listView.adapter = adapter
+        binding.listView.adapter = adapter
 
-        listView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
+        binding.listView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
             val intent = Intent(applicationContext,DetailsActivity::class.java)
-
-            intent.putExtra("name",landmarkNames[position])
-
-            //intent.putExtra("image",landmarkImageIds[position])
-
-            MySingleton.mySelectedImage = landmarkImages[position]
-
-            //val singleton = Singleton.Selected
-            //singleton.selectedImage = landmarkImages[position]
-
-
-
+            intent.putExtra("landmark",landmarkList[position])
+            //MySingleton.selectedLandmark = landmarkList[position]
             startActivity(intent)
         }
+
+         */
 
     }
 }

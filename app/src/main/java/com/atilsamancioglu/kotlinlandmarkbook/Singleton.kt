@@ -1,17 +1,6 @@
 package com.atilsamancioglu.kotlinlandmarkbook
 
-import android.graphics.Bitmap
-
-
 object MySingleton {
-    var mySelectedImage : Bitmap? = null
+    var selectedLandmark : Landmark? = null
 }
 
-
-class Singleton {
-
-    companion object Selected {
-        var selectedImage : Bitmap? = null
-    }
-
-}

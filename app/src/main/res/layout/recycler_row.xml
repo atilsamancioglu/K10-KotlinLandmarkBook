@@ -2,15 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    >
 
     <TextView
-
-        android:id="@+id/textView2"
+        android:id="@+id/recyclerRowTextView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:text="TextView"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:text="Test"
         android:textColor="#0A288A"
-        android:textSize="18sp" />
+        android:textSize="20sp" />
 </LinearLayout>
